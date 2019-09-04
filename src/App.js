@@ -11,34 +11,47 @@ import Header from "./components/Header/Header";
 import Auth from "./pages/Auth/Auth";
 
 // AUTH
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends Component {
-
   state = {
     isSigned: null
-  }
+  };
 
   unsubscribeFromAuth = null;
 
-  componentDidMount(){
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState(() => {
-        return {
-          isSigned: user
-        }
-      })
-    })
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+      if (user) {
+        const userRef = await createUserProfileDocument(user);
+        userRef.onSnapshot(snapshot => {
+          this.setState(() => {
+            return {
+              isSigned: {
+                id: snapshot.id,
+                ...snapshot.data()
+              }
+            };
+          });
+        });
+      } else {
+        this.setState(() => {
+          return {
+            isSigned: null
+          };
+        });
+      }
+    });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
-
 
   render() {
     return (
       <div>
+        <h1>{this.state.isSigned ? this.state.isSigned.displayName : null}</h1>
         <Header isSigned={this.state.isSigned} />
         <Switch>
           <Route exact path="/" component={Homepage} />

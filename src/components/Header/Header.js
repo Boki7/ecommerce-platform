@@ -11,14 +11,19 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { signOut } from "../../firebase/firebase.utils";
 
 const Header = ({ isSigned }) => {
-  console.log(isSigned)
   const handleAuthStatus = () => {
     if (isSigned) {
-      return <div className="option" onClick={signOut}>
-        SIGN OUT
-      </div>;
+      return (
+        <div className="option" onClick={signOut}>
+          SIGN OUT
+        </div>
+      );
     }
-    return <Link className="option" to="/signin">SIGN IN</Link>
+    return (
+      <Link className="option" to="/signin">
+        SIGN IN
+      </Link>
+    );
   };
 
   return (
