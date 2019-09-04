@@ -7,7 +7,20 @@ import "./Header.scss";
 // ASSETS
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
-const Header = () => {
+// AUTH
+import { signOut } from "../../firebase/firebase.utils";
+
+const Header = ({ isSigned }) => {
+  console.log(isSigned)
+  const handleAuthStatus = () => {
+    if (isSigned) {
+      return <div className="option" onClick={signOut}>
+        SIGN OUT
+      </div>;
+    }
+    return <Link className="option" to="/signin">SIGN IN</Link>
+  };
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -20,6 +33,7 @@ const Header = () => {
         <Link className="option" to="/contact">
           CONTACT
         </Link>
+        {handleAuthStatus()}
       </div>
     </div>
   );
