@@ -8,7 +8,7 @@ import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 
 // GOOGLE AUTH
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 export class SignIn extends Component {
   state = {
@@ -16,8 +16,16 @@ export class SignIn extends Component {
     password: ""
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
+
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleChange = e => {

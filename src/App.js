@@ -35,6 +35,7 @@ class App extends Component {
           });
         });
       } else {
+        
         this.setState(() => {
           return {
             isSigned: null
@@ -51,7 +52,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.isSigned ? this.state.isSigned.displayName : null}</h1>
         <Header isSigned={this.state.isSigned} />
         <Switch>
           <Route exact path="/" component={Homepage} />
