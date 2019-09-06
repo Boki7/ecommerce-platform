@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
 // STYLE
 import "./Header.scss";
@@ -10,9 +11,15 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 // AUTH
 import { signOut } from "../../firebase/firebase.utils";
 
-const Header = ({ isSigned }) => {
+
+// COMPONENTS
+import CartIcon from "../CartIcon/CartIcon";
+import CartDropdown from "../CartDropdown/CartDropdown";
+
+
+const Header = ({ currentUser, cartHidden }) => {
   const handleAuthStatus = () => {
-    if (isSigned) {
+    if (currentUser) {
       return (
         <div className="option" onClick={signOut}>
           SIGN OUT
@@ -25,6 +32,10 @@ const Header = ({ isSigned }) => {
       </Link>
     );
   };
+
+  const handleToggleCart = () => {
+      return cartHidden ? null : <CartDropdown />
+  }
 
   return (
     <div className="header">
@@ -39,9 +50,18 @@ const Header = ({ isSigned }) => {
           CONTACT
         </Link>
         {handleAuthStatus()}
+        <CartIcon />
       </div>
+      {handleToggleCart()}
     </div>
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.user.currentUser,
+    cartHidden: state.cart.hidden
+  }
+}
+
+export default connect(mapStateToProps)(Header);
