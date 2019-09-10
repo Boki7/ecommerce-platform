@@ -1,8 +1,12 @@
 .sign-in {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    .title {
-        margin: 10px;
-    }
+  .title {
+    margin: 10px;
+  }
+
+  &-button-group {
+    display: flex;
+  }
 }

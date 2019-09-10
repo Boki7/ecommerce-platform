@@ -10,5 +10,5 @@ export const addCartItem = item => {
   return {
     type: cartType.ADD_CART_ITEM,
     payload: item
-  }
-}
+  };
+};
