@@ -2,12 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 
 // ACTIONS
-import { removeCartItem, addCartItem } from "../../redux/cart/cart.actions";
+import {
+  removeCartItem,
+  addCartItem,
+  decreaseCartItem
+} from "../../redux/cart/cart.actions";
 
 // STYLE
 import "./CheckoutItem.scss";
 
-const CheckoutItem = ({ item, removeCartItem, addCartItem }) => {
+const CheckoutItem = ({
+  item,
+  removeCartItem,
+  addCartItem,
+  decreaseCartItem
+}) => {
   console.log(item);
   return (
     <div className="checkout-item">
@@ -16,7 +25,9 @@ const CheckoutItem = ({ item, removeCartItem, addCartItem }) => {
       </div>
       <span className="name">{item.name}</span>
       <span className="quantity">
-        <div className="arrow">&#10094;</div>
+        <div className="arrow" onClick={() => decreaseCartItem(item)}>
+          &#10094;
+        </div>
         <span className="value">{item.quantity}</span>
         <div
           className="arrow"
@@ -39,6 +50,7 @@ export default connect(
   null,
   {
     removeCartItem,
-    addCartItem
+    addCartItem,
+    decreaseCartItem
   }
 )(CheckoutItem);

@@ -17,5 +17,12 @@ export const removeCartItem = item => {
   return {
     type: cartType.REMOVE_CART_ITEM,
     payload: item
-  }
-}
+  };
+};
+
+export const decreaseCartItem = item => {
+  return {
+    type: cartType.DECREASE_CART_ITEM,
+    payload: item
+  };
+};

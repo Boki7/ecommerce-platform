@@ -1,5 +1,5 @@
 import * as cartType from "./cart.types";
-import { addCartItemUtil } from "./cart.utils";
+import { addCartItemUtil, decreaseCartItemUtil } from "./cart.utils";
 
 const INITIAL_STATE = {
   hidden: true,
@@ -24,6 +24,11 @@ export default (state = INITIAL_STATE, action) => {
         cartItems: state.cartItems.filter(cartItem => {
           return cartItem !== action.payload;
         })
+      };
+    case cartType.DECREASE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: decreaseCartItemUtil(state.cartItems, action.payload)
       };
     default:
       return state;
