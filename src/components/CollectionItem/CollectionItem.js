@@ -12,13 +12,13 @@ const CollectionItem = ({ item, addCartItem }) => {
   };
 
   return (
-    <div className="collection-item" onClick={() => addCartItem(item)}>
+    <div className="collection-item" >
       <div className="image" style={styles}></div>
       <div className="collection-footer">
         <span className="name">{item.name}</span>
         <span className="price">${item.price}</span>
       </div>
-      <CustomButton inverted>ADD TO CART</CustomButton>
+      <CustomButton inverted onClick={() => addCartItem(item)}>ADD TO CART</CustomButton>
     </div>
   );
 };

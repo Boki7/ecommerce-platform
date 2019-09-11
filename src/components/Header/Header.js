@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
+// REDUX SELECTORS
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+
 // STYLE
 import "./Header.scss";
 
@@ -59,7 +62,7 @@ const Header = ({ currentUser, cartHidden }) => {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.user.currentUser,
+    currentUser: selectCurrentUser(state),
     cartHidden: state.cart.hidden
   }
 }

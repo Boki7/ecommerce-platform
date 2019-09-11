@@ -18,6 +18,13 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addCartItemUtil(state.cartItems, action.payload)
       };
+    case cartType.REMOVE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(cartItem => {
+          return cartItem !== action.payload;
+        })
+      };
     default:
       return state;
   }
