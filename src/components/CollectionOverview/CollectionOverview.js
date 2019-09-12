@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 // STYLE
-import './CollectionOverview.scss';
+import "./CollectionOverview.scss";
 
 // COMPONENTS
 import CollectionPreview from "../CollectionPreview/CollectionPreview";
@@ -19,7 +19,7 @@ const CollectionOverview = ({ collections }) => {
 
 const mapStateToProps = state => {
   return {
-    collections: state.shop.collections
+    collections: Object.values(state.shop.collections)
   };
 };
 
