@@ -1,12 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 // REDUX SELECTORS
-import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
-// STYLE
-import "./Header.scss";
+// STYLED COMPONENTS
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionContainer
+} from "./Header.styles";
 
 // ASSETS
 import { ReactComponent as Logo } from "../../assets/crown.svg";
@@ -14,49 +18,39 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 // AUTH
 import { signOut } from "../../firebase/firebase.utils";
 
-
 // COMPONENTS
 import CartIcon from "../CartIcon/CartIcon";
 import CartDropdown from "../CartDropdown/CartDropdown";
-
 
 const Header = ({ currentUser, cartHidden }) => {
   const handleAuthStatus = () => {
     if (currentUser) {
       return (
-        <div className="option" onClick={signOut}>
+        <OptionContainer as="div" onClick={signOut}>
           SIGN OUT
-        </div>
+        </OptionContainer>
       );
     }
-    return (
-      <Link className="option" to="/signin">
-        SIGN IN
-      </Link>
-    );
+    return <OptionContainer to="/signin">SIGN IN</OptionContainer>;
   };
 
   const handleToggleCart = () => {
-      return cartHidden ? null : <CartDropdown />
-  }
+    return cartHidden ? null : <CartDropdown />;
+  };
 
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionContainer to="/shop">SHOP</OptionContainer>
+        <OptionContainer to="/contact">CONTACT</OptionContainer>
         {handleAuthStatus()}
         <CartIcon />
-      </div>
+      </OptionsContainer>
       {handleToggleCart()}
-    </div>
+    </HeaderContainer>
   );
 };
 
@@ -64,7 +58,7 @@ const mapStateToProps = state => {
   return {
     currentUser: selectCurrentUser(state),
     cartHidden: state.cart.hidden
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(Header);

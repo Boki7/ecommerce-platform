@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // REDUX SELECTORS
-import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCurrentUser } from "./redux/user/user.selectors";
 
 // ACTIONS
 import { setCurrentUser } from "./redux/user/user.actions";
@@ -20,7 +20,6 @@ import Checkout from "./pages/Checkout/Checkout";
 
 // AUTH
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-
 
 class App extends Component {
   state = {
@@ -41,7 +40,7 @@ class App extends Component {
           });
         });
       } else {
-        setCurrentUser(user)
+        setCurrentUser(user);
       }
     });
   }
@@ -58,7 +57,13 @@ class App extends Component {
           <Route exact path="/" component={Homepage} />
           <Route path="/shop" component={Shop} />
           <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect to="/" />) : (<Auth />)} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <Auth />
+            }
+          />
         </Switch>
       </div>
     );
@@ -68,8 +73,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: selectCurrentUser(state)
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
