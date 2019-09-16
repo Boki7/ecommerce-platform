@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as BagIcon } from "../../assets/shopping-bag.svg";
+
 import { connect } from "react-redux";
 
 
@@ -9,15 +9,20 @@ import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
 // ACTIONS
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 
-// STYLE
-import "./CartIcon.scss";
+// STYLED COMPONENTS
+import {
+  CartIconContainer,
+  BagIconContainer,
+  ItemCountContainer
+} from './CartIcon.style';
+
 
 const CartIcon = ({ toggleCartHidden, itemCount }) => {
   return (
-    <div className="cart-icon" onClick={toggleCartHidden}>
-      <BagIcon className="shopping-icon" />
-      <span className="item-count">{itemCount}</span>
-    </div>
+    <CartIconContainer onClick={toggleCartHidden}>
+      <BagIconContainer />
+      <ItemCountContainer>{itemCount}</ItemCountContainer>
+    </CartIconContainer>
   );
 };
 

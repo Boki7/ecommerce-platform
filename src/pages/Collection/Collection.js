@@ -8,6 +8,7 @@ import "./Collection.scss";
 import CollectionItem from "../../components/CollectionItem/CollectionItem";
 
 const Collection = ({ collection }) => {
+  console.log(collection)
   const { title, items } = collection;
   const renderCollectionItems = () => {
     return items.map(item => {
@@ -24,7 +25,7 @@ const Collection = ({ collection }) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    collection: state.shop.collections[ownProps.match.params.collectionId]
+    collection: state.shop.collections ? state.shop.collections[ownProps.match.params.collectionId] : null
   };
 };
 
