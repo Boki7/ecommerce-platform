@@ -29,14 +29,14 @@ export class Shop extends Component {
           exact
           path={match.path}
           render={props => (
-            <CollectionOverviewWithSpinner isLoading={this.props.isFetching} {...props} />
+            <CollectionOverviewWithSpinner isLoading={!this.props.isFetching} {...props} />
           )}
         />
         <Route
           exact
           path={`${match.path}/:collectionId`}
           render={props => (
-            <CollectionWithSpinner isLoading={this.props.isFetching} {...props} />
+            <CollectionWithSpinner isLoading={!this.props.isFetching} {...props} />
           )}
         />
       </div>
@@ -46,7 +46,7 @@ export class Shop extends Component {
 
 const mapStateToProps = state => {
   return {
-    isFetching: state.shop.isFetching
+    isFetching: state.shop.collections
   }
 }
 
